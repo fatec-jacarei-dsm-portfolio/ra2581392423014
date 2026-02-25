@@ -3,121 +3,668 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio de Desenvolvimento Web">
-    <title>Meu Portfólio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Anderson Fontes — Full Stack Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>history.scrollRestoration = 'manual'; if (window.scrollY > 0) window.scrollTo(0, 0);</script>
+    <style>
+        :root {
+            --bg:       #07070f;
+            --bg-2:     #0d0d1c;
+            --bg-3:     #121228;
+            --bg-4:     #19193a;
+            --accent:        #a178ff;
+            --accent-bright: #bf9fff;
+            --accent-dim:    rgba(161, 120, 255, 0.13);
+            --accent-glow:   rgba(161, 120, 255, 0.30);
+            --pink:          #e070c8;
+            --text-100: #f0eeff;
+            --text-200: #c4bfe0;
+            --text-300: #7b769c;
+            --border:        rgba(161, 120, 255, 0.12);
+            --border-hover:  rgba(161, 120, 255, 0.38);
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans:  'DM Sans', sans-serif;
+            --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text-200);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: none;
+        }
+
+        ::selection { background: var(--accent); color: #fff; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ── NOISE ── */
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            opacity: 0.5; mix-blend-mode: overlay;
+        }
+
+        /* ── AMBIENT ORBS ── */
+        .ambient { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(150px); }
+        .orb-1 { top:-20%; left:-10%; width:55vw; height:55vw; background:rgba(100,60,255,.18); animation:drift 18s ease-in-out infinite alternate; }
+        .orb-2 { bottom:-15%; right:-10%; width:60vw; height:60vw; background:rgba(161,120,255,.12); animation:drift 22s ease-in-out infinite alternate-reverse; }
+        .orb-3 { top:40%; left:30%; width:40vw; height:40vw; background:rgba(224,112,200,.07); animation:drift 26s ease-in-out infinite alternate; }
+        @keyframes drift { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(4%,8%) scale(1.08)} }
+
+        /* ── CURSOR ── */
+        .cursor-dot {
+            position:fixed; width:7px; height:7px; background:var(--accent); border-radius:50%;
+            pointer-events:none; z-index:9999; transform:translate(-50%,-50%);
+            transition: width .3s var(--ease-spring), height .3s var(--ease-spring), background .3s;
+        }
+        .cursor-ring {
+            position:fixed; width:34px; height:34px; border:1.5px solid var(--accent); border-radius:50%;
+            pointer-events:none; z-index:9998; transform:translate(-50%,-50%);
+            transition: width .4s var(--ease-spring), height .4s var(--ease-spring), opacity .3s;
+        }
+        body:has(a:hover) .cursor-dot  { width:12px; height:12px; background:var(--pink); }
+        body:has(a:hover) .cursor-ring { width:56px; height:56px; opacity:.5; }
+
+        /* ── LAYOUT ── */
+        .wrap { max-width:1240px; margin:0 auto; padding:0 60px; position:relative; z-index:1; }
+        section { padding:150px 0; position:relative; }
+
+        ::-webkit-scrollbar { width:4px; }
+        ::-webkit-scrollbar-track { background:var(--bg-2); }
+        ::-webkit-scrollbar-thumb { background:var(--accent); border-radius:4px; }
+
+        /* ── HEADER ── */
+        header { position:fixed; top:0; left:0; right:0; z-index:100; padding:24px 0; }
+        header::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(180deg, rgba(7,7,15,.94) 0%, transparent 100%);
+        }
+        header .wrap { display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-family:var(--serif); font-size:1.45rem; color:var(--text-100); font-style:italic; position:relative; z-index:1; }
+        .logo em { font-style:normal; color:var(--accent); }
+        nav { display:flex; gap:40px; position:relative; z-index:1; }
+        nav a {
+            font-size:.82rem; font-weight:500; color:var(--text-300);
+            letter-spacing:.06em; text-transform:uppercase;
+            position:relative; transition:color .3s;
+        }
+        nav a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--accent); transition:width .4s var(--ease-out); }
+        nav a:hover { color:var(--text-100); }
+        nav a:hover::after { width:100%; }
+
+        /* ── HERO ── */
+        .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:100px; }
+        .hero-inner { display:grid; grid-template-columns:1fr .85fr; gap:80px; align-items:end; }
+
+        .hero-eyebrow { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+        .hero-eyebrow span { font-size:.78rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--text-300); }
+        .eyebrow-line { width:44px; height:1px; background:linear-gradient(90deg,var(--accent),transparent); }
+        .status-dot {
+            width:7px; height:7px; background:#4cdd80; border-radius:50%; flex-shrink:0;
+            box-shadow:0 0 0 3px rgba(76,221,128,.2); animation:pg 2.5s ease-in-out infinite;
+        }
+        @keyframes pg { 0%,100%{box-shadow:0 0 0 3px rgba(76,221,128,.2)} 50%{box-shadow:0 0 0 8px rgba(76,221,128,0)} }
+
+        .hero h1 {
+            font-family:var(--serif); font-size:clamp(4rem,6.5vw,7rem);
+            color:var(--text-100); line-height:.93; letter-spacing:-.035em;
+            margin-bottom:36px; font-weight:400;
+        }
+        .hero h1 em { font-style:italic; color:var(--accent); }
+        .hero h1 .indent { display:block; padding-left:100px; }
+
+        .hero-desc { font-size:1.08rem; color:var(--text-300); max-width:420px; line-height:1.8; font-weight:300; margin-bottom:48px; }
+
+        .hero-cta { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+        .btn { display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); font-weight:500; font-size:.9rem; letter-spacing:.02em; transition:all .4s var(--ease-out); cursor:none; }
+        .btn-primary { background:var(--accent); color:#fff; padding:15px 30px; border-radius:100px; border:1px solid var(--accent); }
+        .btn-primary:hover { background:var(--accent-bright); border-color:var(--accent-bright); transform:translateY(-2px); box-shadow:0 12px 36px var(--accent-glow); }
+        .btn-outline { color:var(--text-300); padding:15px 30px; border-radius:100px; border:1px solid var(--border); }
+        .btn-outline:hover { color:var(--text-100); border-color:var(--border-hover); background:var(--accent-dim); }
+        .btn .arrow { transition:transform .4s var(--ease-out); display:inline-block; }
+        .btn:hover .arrow { transform:translateX(5px); }
+
+        /* ── HERO RIGHT ── */
+        .hero-right { position:relative; }
+        .hero-img-frame {
+            position:relative; overflow:hidden; border-radius:8px 8px 80px 8px;
+            aspect-ratio:3/4; max-width:400px; margin-left:auto;
+            box-shadow:0 40px 100px rgba(0,0,0,.6), 0 0 0 1px var(--border);
+        }
+        .hero-img-frame::before {
+            content:''; position:absolute; inset:0; z-index:3; pointer-events:none;
+            background:linear-gradient(135deg,var(--accent) 0%,transparent 40%,transparent 60%,var(--pink) 100%);
+            border-radius:inherit;
+            -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+            -webkit-mask-composite:xor; mask-composite:exclude; padding:1.5px;
+        }
+        .hero-img-frame img { width:100%; height:100%; object-fit:cover; object-position:top; filter:saturate(.9); transition:transform .8s var(--ease-out),filter .5s; }
+        .hero-img-frame:hover img { transform:scale(1.04); filter:saturate(1.1); }
+
+        .hero-caption {
+            position:absolute; bottom:28px; left:-28px;
+            background:var(--bg-3); border:1px solid var(--border);
+            padding:16px 22px; border-radius:10px; font-size:.8rem; line-height:1.55; z-index:10;
+            box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 20px var(--accent-dim); backdrop-filter:blur(12px);
+        }
+        .hero-caption strong { display:block; font-weight:600; color:var(--accent-bright); margin-bottom:3px; }
+
+        .hero-badge { position:absolute; top:36px; right:-18px; z-index:10; width:96px; height:96px; animation:slow-spin 20s linear infinite; }
+        .hero-badge svg text { font-size:9px; font-weight:600; fill:var(--text-300); letter-spacing:3.5px; font-family:var(--sans); }
+        .hero-badge-center {
+            position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+            width:28px; height:28px; background:var(--accent); border-radius:50%;
+            display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+            box-shadow:0 0 16px var(--accent-glow);
+        }
+        @keyframes slow-spin { to { transform:rotate(360deg); } }
+
+        /* ── STATS ── */
+        .stats-bar {
+            display:grid; grid-template-columns:repeat(3,1fr);
+            background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
+            overflow:hidden; margin-top:100px;
+            box-shadow:0 20px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.04);
+        }
+        .stat-item { padding:28px 36px; border-right:1px solid var(--border); transition:background .3s; }
+        .stat-item:last-child { border-right:none; }
+        .stat-item:hover { background:var(--accent-dim); }
+        .stat-number { font-family:var(--serif); font-size:3rem; color:var(--accent-bright); line-height:1; margin-bottom:8px; }
+        .stat-label { font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-300); font-weight:500; }
+
+        /* ── SECTION HEADER ── */
+        .section-header { margin-bottom:72px; }
+        .section-label {
+            display:inline-flex; align-items:center; gap:12px;
+            font-size:.75rem; font-weight:600; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--accent); margin-bottom:18px;
+        }
+        .section-label::before { content:''; display:block; width:26px; height:1.5px; background:var(--accent); }
+        .section-title-lg {
+            font-family:var(--serif); font-size:clamp(2.8rem,4.5vw,4.8rem);
+            color:var(--text-100); line-height:1.05; letter-spacing:-.03em; font-weight:400;
+        }
+        .section-title-lg em { font-style:italic; color:var(--accent); }
+
+        /* ── SKILLS ── */
+        #skills { background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+        .skills-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+        .skill-cell {
+            background:var(--bg-2); padding:40px 28px; display:flex; flex-direction:column;
+            position:relative; overflow:hidden; transition:background .4s var(--ease-out);
+        }
+        .skill-cell::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--accent-dim) 0%,transparent 65%); opacity:0; transition:opacity .4s; }
+        .skill-cell:hover { background:var(--bg-3); }
+        .skill-cell:hover::after { opacity:1; }
+        .skill-icon { font-size:2.2rem; margin-bottom:20px; color:var(--text-300); transition:color .4s var(--ease-out),transform .4s var(--ease-spring); position:relative; z-index:1; }
+        .skill-cell:hover .skill-icon { color:var(--accent); transform:scale(1.15); }
+        .skill-name { font-size:1.05rem; font-weight:500; color:var(--text-200); margin-bottom:6px; position:relative; z-index:1; transition:color .3s; }
+        .skill-cell:hover .skill-name { color:var(--text-100); }
+        .skill-desc { font-size:.78rem; color:var(--text-300); font-weight:300; position:relative; z-index:1; }
+
+        /* ── PROJECTS ── */
+        #projetos { background:var(--bg); }
+
+        .project-featured {
+            display:grid; grid-template-columns:1fr 1fr;
+            border:1px solid var(--border); border-radius:12px; overflow:hidden;
+            margin-bottom:4px; transition:box-shadow .4s var(--ease-out),border-color .3s;
+        }
+        .project-featured:hover { border-color:var(--border-hover); box-shadow:0 30px 80px rgba(161,120,255,.12); }
+        .project-img-wrap { position:relative; overflow:hidden; min-height:460px; }
+        .project-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:top left; transition:transform .8s var(--ease-out),filter .5s; filter:grayscale(20%) brightness(.95); }
+        .project-featured:hover .project-img-wrap img { transform:scale(1.04); filter:grayscale(0%) brightness(1); }
+        .project-img-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(7,7,15,.2) 0%,transparent 100%); }
+
+        .project-info {
+            background:var(--bg-2); padding:56px; display:flex; flex-direction:column;
+            justify-content:space-between; border-left:1px solid var(--border);
+        }
+        .project-number { font-family:var(--serif); font-size:6rem; color:rgba(161,120,255,.07); line-height:1; margin-bottom:4px; font-style:italic; }
+        .project-type { font-size:.73rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+        .project-info h3 { font-family:var(--serif); font-size:2.8rem; color:var(--text-100); line-height:1.1; font-weight:400; margin-bottom:18px; }
+        .project-info p { font-size:.97rem; color:var(--text-300); line-height:1.75; margin-bottom:36px; font-weight:300; }
+
+        .tech-pills { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:36px; }
+        .pill { padding:6px 15px; border:1px solid var(--border); border-radius:100px; font-size:.78rem; color:var(--text-300); font-weight:500; transition:all .3s; }
+        .pill:hover { background:var(--accent-dim); color:var(--accent-bright); border-color:var(--border-hover); }
+        .project-link { display:inline-flex; align-items:center; gap:12px; color:var(--accent-bright); font-size:.88rem; font-weight:600; letter-spacing:.04em; transition:gap .3s var(--ease-out); }
+        .project-link:hover { gap:18px; }
+
+        .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-top:4px; }
+        .project-card {
+            background:var(--bg-2); overflow:hidden; display:flex; flex-direction:column;
+            border:1px solid var(--border); border-radius:12px; transition:all .4s var(--ease-out);
+        }
+        .project-card:hover { border-color:var(--border-hover); background:var(--bg-3); box-shadow:0 20px 50px rgba(161,120,255,.1); transform:translateY(-6px); }
+        .project-card-img { height:200px; overflow:hidden; }
+        .project-card-img img { width:100%; height:100%; object-fit:cover; object-position:top; transition:transform .7s var(--ease-out),filter .5s; filter:grayscale(25%) brightness(.9); }
+        .project-card:hover .project-card-img img { transform:scale(1.1); filter:grayscale(0%) brightness(1.05); }
+        .project-card-body { padding:30px; flex:1; display:flex; flex-direction:column; }
+        .project-card-icon {
+            width:42px; height:42px; background:var(--accent-dim); border:1px solid var(--border);
+            border-radius:10px; display:flex; align-items:center; justify-content:center;
+            font-size:1.05rem; color:var(--accent); margin-bottom:18px;
+            transition:background .3s,transform .4s var(--ease-spring);
+        }
+        .project-card:hover .project-card-icon { background:var(--accent); color:#fff; transform:rotate(8deg) scale(1.1); }
+        .project-card h3 { font-family:var(--serif); font-size:1.5rem; color:var(--text-100); margin-bottom:10px; font-weight:400; }
+        .project-card p { font-size:.88rem; color:var(--text-300); line-height:1.65; margin-bottom:22px; flex:1; }
+
+        /* ── CERTIFICATES ── */
+        #certificates { background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+        .certs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+        .cert-card {
+            background:var(--bg); border:1px solid var(--border); border-radius:12px;
+            padding:40px; position:relative; overflow:hidden; transition:all .4s var(--ease-out);
+        }
+        .cert-card::before {
+            content:''; position:absolute; top:0; left:0; right:0; height:2px;
+            background:linear-gradient(90deg,var(--accent),var(--pink)); opacity:0; transition:opacity .4s;
+        }
+        .cert-card::after {
+            content:''; position:absolute; inset:0;
+            background:radial-gradient(circle at top left,var(--accent-dim) 0%,transparent 60%);
+            opacity:0; transition:opacity .4s;
+        }
+        .cert-card:hover { transform:translateY(-6px); border-color:var(--border-hover); box-shadow:0 20px 50px rgba(161,120,255,.12); }
+        .cert-card:hover::before, .cert-card:hover::after { opacity:1; }
+
+        /* MEDALHAS — sem filtros, tamanho natural e legível */
+        .cert-img-wrap {
+            width:90px; height:90px; margin-bottom:24px; position:relative; z-index:1;
+            background: transparent;
+        }
+        .cert-img-wrap img {
+            width:100%; height:100%; object-fit:contain;
+            /* Zero filters — medals shown exactly as designed */
+        }
+
+        .cert-card h3 { font-family:var(--serif); font-size:1.35rem; color:var(--text-100); margin-bottom:10px; font-weight:400; position:relative; z-index:1; }
+        .cert-card p { font-size:.85rem; color:var(--text-300); margin-bottom:22px; line-height:1.6; position:relative; z-index:1; }
+        .cert-link {
+            display:inline-flex; align-items:center; gap:8px;
+            font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
+            color:var(--accent); position:relative; z-index:1; transition:gap .3s var(--ease-out),color .3s;
+        }
+        .cert-link:hover { gap:14px; color:var(--accent-bright); }
+
+        /* ── CONTACT ── */
+        #contato { background:var(--bg); overflow:hidden; }
+        #contato::before {
+            content:'Talk.'; position:absolute; bottom:-80px; right:-30px;
+            font-family:var(--serif); font-size:32vw; color:rgba(161,120,255,.025);
+            line-height:1; pointer-events:none; font-style:italic;
+        }
+        .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
+        .contact-left p { color:var(--text-300); font-size:1.05rem; line-height:1.8; font-weight:300; margin-top:20px; }
+        .contact-card {
+            background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
+            padding:48px; position:relative; overflow:hidden;
+        }
+        .contact-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),var(--pink)); }
+        .contact-item {
+            display:flex; align-items:center; gap:18px;
+            padding:22px 0; border-bottom:1px solid var(--border);
+            transition:padding-left .4s var(--ease-out);
+        }
+        .contact-item:last-child { border-bottom:none; }
+        .contact-item:hover { padding-left:10px; }
+        .contact-icon-wrap {
+            width:46px; height:46px; background:var(--accent-dim); border:1px solid var(--border);
+            border-radius:50%; display:flex; align-items:center; justify-content:center;
+            color:var(--accent); font-size:1rem; flex-shrink:0;
+            transition:background .3s,transform .4s var(--ease-spring);
+        }
+        .contact-item:hover .contact-icon-wrap { background:var(--accent); color:#fff; transform:scale(1.1) rotate(-5deg); }
+        .contact-item-text strong { display:block; font-size:.74rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-300); margin-bottom:4px; }
+        .contact-item-text a { font-size:.97rem; color:var(--text-200); font-weight:500; transition:color .3s; }
+        .contact-item-text a:hover { color:var(--accent-bright); }
+
+        /* ── FOOTER ── */
+        footer { background:var(--bg); border-top:1px solid var(--border); padding:36px 0; }
+        footer .wrap { display:flex; justify-content:space-between; align-items:center; }
+        .footer-copy { font-size:.8rem; color:var(--text-300); }
+        .footer-copy em { color:var(--accent); font-style:normal; }
+        .footer-top { display:flex; align-items:center; gap:8px; font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-300); cursor:none; transition:color .3s; }
+        .footer-top:hover { color:var(--accent); }
+
+        /* ── REVEAL ANIMATIONS ── */
+        .reveal       { opacity:0; transform:translateY(36px); transition:all .9s var(--ease-out); }
+        .reveal-left  { opacity:0; transform:translateX(-36px); transition:all .9s var(--ease-out); }
+        .reveal-right { opacity:0; transform:translateX(36px); transition:all .9s var(--ease-out); }
+        .reveal.visible,.reveal-left.visible,.reveal-right.visible { opacity:1; transform:none; }
+        .delay-1{transition-delay:.1s} .delay-2{transition-delay:.2s} .delay-3{transition-delay:.3s}
+        .delay-4{transition-delay:.4s} .delay-5{transition-delay:.5s}
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1024px){
+            .wrap{padding:0 36px}
+            .hero-inner{grid-template-columns:1fr;gap:50px}
+            .hero-right{order:-1}
+            .hero-img-frame{max-width:340px;margin:0 auto}
+            .hero h1 .indent{padding-left:50px}
+            .skills-grid{grid-template-columns:repeat(2,1fr)}
+            .project-featured{grid-template-columns:1fr}
+            .project-img-wrap{min-height:260px}
+            .projects-grid{grid-template-columns:repeat(2,1fr)}
+            .contact-grid{grid-template-columns:1fr;gap:56px}
+        }
+        @media(max-width:768px){
+            .wrap{padding:0 22px}
+            nav{display:none}
+            .hero h1 .indent{padding-left:0}
+            .projects-grid{grid-template-columns:1fr}
+            .certs-grid{grid-template-columns:1fr}
+            #contato::before{display:none}
+            .hero-badge{display:none}
+            .hero-caption{position:relative;left:0;bottom:0;margin-top:16px}
+            .stats-bar{grid-template-columns:1fr}
+            .stat-item{border-right:none;border-bottom:1px solid var(--border)}
+            .stat-item:last-child{border-bottom:none}
+        }
+    </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
+
+    <div class="ambient">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- HEADER -->
     <header>
-        <nav>
-            <div class="logo">Meu Portfólio</div>
-        </nav>
+        <div class="wrap">
+            <div class="logo">A.<em>Fontes</em></div>
+            <nav>
+                <a href="#skills">Stack</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#certificates">Certificados</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- Seção Sobre -->
-    <section id="sobre" class="sobre">
-        <div class="container">
-            <h2>Anderson Fontes Fernandes Júnior</h2>
-            <div class="perfil">
-                <!-- Foto de perfil -->
-                <img src="perfil.jpg" alt="Foto de Perfil" class="foto-perfil">
+    <!-- HERO -->
+    <section class="hero" id="sobre">
+        <div class="wrap hero-inner">
+            <div class="hero-left">
+                <div class="hero-eyebrow reveal">
+                    <div class="status-dot"></div>
+                    <span>Disponível para novos projetos</span>
+                    <div class="eyebrow-line"></div>
+                </div>
+                <h1 class="reveal delay-1">
+                    Full Stack<br>
+                    <em>Developer</em><br>
+                    <span class="indent">&amp; Designer.</span>
+                </h1>
+                <p class="hero-desc reveal delay-2">
+                    Sou Anderson Fontes, estudante de Desenvolvimento de Sistemas na Fatec Jacareí. Construo interfaces sofisticadas onde performance encontra beleza.
+                </p>
+                <div class="hero-cta reveal delay-3">
+                    <a href="#contato" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Entrar em contato
+                    </a>
+                    <a href="#projetos" class="btn btn-outline">
+                        Ver projetos <span class="arrow">→</span>
+                    </a>
+                </div>
             </div>
-            <p>Olá! Sou estudante da Fatec de Jacareí, estou no 2° semestre de Desenvolvimento de Software Multiplataforma.</p>
 
-            <!-- Micro certificação -->
-            <!-- Micro certificação -->
-<a href="https://badge.cps.sp.gov.br//view.aspx?06a9cee9-4660-4a7d-b467-a0f93dde1340" target="_blank" style="border:1px solid gray; padding:5px; display: inline-block; margin-top: 15px; width: 80px; height: auto;">
-    <img src="https://badge.cps.sp.gov.br/_files/60ecbd64c97644179b0a11b8320aa942.png" alt="Micro Certificação CPS SP" style="width: 100%; height: auto;">
-</a>
-<br>
-<small style="font-size: 0.7rem; color: #555;">
-    <a href="https://siga.cps.sp.gov.br/cartorio/autenticador.aspx?faaace49-731a-44ed-b37b-2e5f6a69d9b0" target="_blank" style="color: #555; text-decoration: underline;">Validar Certificação</a>
-</small>
+            <div class="hero-right reveal-right">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 100 100" width="100" height="100">
+                        <defs><path id="ct" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+                        <text><textPath href="#ct">FATEC JACAREÍ • FULL STACK • 2026 •</textPath></text>
+                    </svg>
+                    <div class="hero-badge-center">✦</div>
+                </div>
+                <div class="hero-img-frame">
+                    <img src="perfil.jpg" alt="Anderson Fontes">
+                </div>
+                <div class="hero-caption">
+                    <strong>Anderson Fontes</strong>
+                    Full Stack Developer<br>Jacareí, SP — Brasil
+                </div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="stats-bar reveal delay-4">
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Projetos entregues</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Tecnologias dominadas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Certificações oficiais</div>
+                </div>
+            </div>
         </div>
     </section>
 
-<section id="projetos" class="projetos">
-    <div class="container">
-        <h2>Meus Projetos</h2>
-        <div class="projetos-grid">
-            <div class="projeto">
-                <a href="https://github.com/DevsScrumAcademy/1-DSM---DevsAcademy" target="_blank">
-                    <img src="p1.PNG" alt="Projeto 1">
-                    <h3>DevsScrumAcademy</h3>
-                </a>
-                <!-- DevsScrumAcademy -->
-                <p><strong>Atuação:</strong> Desenvolvedor Front-end em time Scrum</p>
-                <p><strong>Descrição:</strong> Projeto realizado em equipe utilizando metodologia ágil Scrum. Plataforma de aprendizado sobre a metodologia Scrum, focada em ensinar os conceitos e práticas ágeis, com emissão de certificados ao final do curso.</p>
-
-                <p><strong>Tecnologias:</strong> HTML, CSS, JavaScript, Git</p>
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="wrap">
+            <div class="section-header reveal">
+                <div class="section-label">Habilidades</div>
+                <h2 class="section-title-lg">Tech <em>Stack</em></h2>
             </div>
-
-            <div class="projeto">
-                <a href="https://github.com/CodeGators/CodeGators---Front-Server" target="_blank">
-                    <img src="p2.PNG" alt="Projeto 2">
-                    <h3>WildFirExplorer</h3>
-                </a>
-                <!-- WildFirExplorer -->
-                <p><strong>Atuação:</strong> Desenvolvedor Full Stack em time Scrum</p>
-                <p><strong>Descrição:</strong> Projeto desenvolvido em time Scrum. Ferramenta interativa para monitoramento de incêndios florestais, utilizando dados do INPE com gráficos dinâmicos e mapas para análise de focos de calor e riscos.</p>
-
-                <p><strong>Tecnologias:</strong> React, TypeScript, SQL</p>
+            <div class="skills-grid">
+                <div class="skill-cell reveal delay-1"><div class="skill-icon"><i class="fa-brands fa-html5"></i></div><div class="skill-name">HTML5</div><div class="skill-desc">Semântica & Acessibilidade</div></div>
+                <div class="skill-cell reveal delay-2"><div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div><div class="skill-name">CSS3</div><div class="skill-desc">Estilização avançada</div></div>
+                <div class="skill-cell reveal delay-3"><div class="skill-icon"><i class="fa-brands fa-js"></i></div><div class="skill-name">JavaScript</div><div class="skill-desc">ES6+ & Interatividade</div></div>
+                <div class="skill-cell reveal delay-4"><div class="skill-icon"><i class="fa-solid fa-file-code"></i></div><div class="skill-name">TypeScript</div><div class="skill-desc">Código tipado & escalável</div></div>
+                <div class="skill-cell reveal delay-1"><div class="skill-icon"><i class="fa-brands fa-react"></i></div><div class="skill-name">React.js</div><div class="skill-desc">UI declarativa & hooks</div></div>
+                <div class="skill-cell reveal delay-2"><div class="skill-icon"><i class="fa-brands fa-node-js"></i></div><div class="skill-name">Node.js</div><div class="skill-desc">Backend & APIs REST</div></div>
+                <div class="skill-cell reveal delay-3"><div class="skill-icon"><i class="fa-solid fa-database"></i></div><div class="skill-name">SQL</div><div class="skill-desc">Banco relacional</div></div>
+                <div class="skill-cell reveal delay-4"><div class="skill-icon"><i class="fa-brands fa-python"></i></div><div class="skill-name">Python</div><div class="skill-desc">Data science & scripts</div></div>
             </div>
-
-            <div class="projeto">
-                <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Projeto%20Megasena" target="_blank">
-                    <img src="megasena.png" alt="Projeto 3">
-                    <h3>Megasena</h3>
-                </a>
-                <p><strong>Atuação:</strong> Desenvolvedor Full Stack</p>
-                <p><strong>Descrição:</strong> Aplicação simples para consultar números sorteados da Mega-Sena, permitindo ao usuário alternar entre tema claro e escuro para personalizar a experiência.</p>
-                <p><strong>Tecnologias:</strong> React, TypeScript, SQL</p>
-            </div>
-
-            <div class="projeto">
-                <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Sistema%20de%20Irradia%C3%A7%C3%A3o%20Solar" target="_blank">
-                    <img src="irradiacao.png" alt="Projeto 4">
-                    <h3>Sistema de Irradiação Solar</h3>
-                </a>
-                <p><strong>Atuação:</strong> Desenvolvedor Full Stack</p>
-                <p><strong>Descrição:</strong> Sistema para análise de radiação solar no Brasil, utilizando dados geoespaciais para otimizar o uso de energia solar, com gráficos e mapas interativos.</p>
-                <p><strong>Tecnologias:</strong> React, TypeScript, SQL</p>
-            </div>
-
-            <div class="projeto">
-                <a href="https://github.com/Anderson-Fontes/Controle-de-Qualidade" target="_blank">
-                    <img src="qualidade.png" alt="Projeto 5">
-                    <h3>Controle De Qualidade</h3>
-                </a>
-                <!-- Controle de Qualidade -->
-                <p><strong>Atuação:</strong> Desenvolvedor Full Stack em time Scrum</p>
-                <p><strong>Descrição:</strong> Projeto realizado em time Scrum. Aplicação que analisa a qualidade de imagens comparando uma imagem de referência com a de teste, utilizando algoritmos de assinatura digital e cálculos de diferença de pixels.</p>
-
-                <p><strong>Tecnologias:</strong> HTML, JavaScript, CSS</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-    <!-- Seção Contato -->
-    <section id="contato" class="contato">
-        <div class="container">
-            <h2>Entre em Contato</h2>
-            <form action="#" method="post">
-                <h3>Email: andersonfontes795@gmail.com</h3>
-                <h3>GitHub: <a href="https://github.com/Anderson-Fontes" target="_blank">github.com/Anderson-Fontes</a></h3>
-            </form>
         </div>
     </section>
 
-    <!-- Rodapé -->
+    <!-- PROJECTS -->
+    <section id="projetos">
+        <div class="wrap">
+            <div class="section-header reveal">
+                <div class="section-label">Trabalhos Selecionados</div>
+                <h2 class="section-title-lg">Projetos <em>em destaque</em></h2>
+            </div>
+
+            <a href="https://github.com/CodeGators/CodeGators---Front-Server" target="_blank" class="project-featured reveal">
+                <div class="project-img-wrap">
+                    <img src="p2.PNG" alt="WildFireExplorer">
+                    <div class="project-img-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-number">01</div>
+                        <div class="project-type">Case Principal — Scrum · Equipe CodeGators</div>
+                        <h3>WildFire<br>Explorer</h3>
+                        <p>Painel avançado para monitoramento de incêndios florestais em tempo real. Processamento de dados complexos com back-end robusto e interface visualmente limpa.</p>
+                        <div class="tech-pills">
+                            <span class="pill">React</span>
+                            <span class="pill">TypeScript</span>
+                            <span class="pill">PostgreSQL</span>
+                            <span class="pill">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="project-link">Ver no GitHub <span>→</span></div>
+                </div>
+            </a>
+
+            <div class="projects-grid">
+                <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Projeto%20Megasena" target="_blank" class="project-card reveal delay-1">
+                    <div class="project-card-img"><img src="megasena.png" alt="Megasena Checker"></div>
+                    <div class="project-card-body">
+                        <div class="project-card-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                        <h3>Megasena Checker</h3>
+                        <p>Aplicação Full Stack para busca, auditoria e armazenamento de sorteios da loteria. Foco em resposta rápida e UX intuitiva.</p>
+                        <div class="tech-pills"><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">SQL</span></div>
+                    </div>
+                </a>
+                <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Sistema%20de%20Irradia%C3%A7%C3%A3o%20Solar" target="_blank" class="project-card reveal delay-2">
+                    <div class="project-card-img"><img src="irradiacao.png" alt="Solar Analytics"></div>
+                    <div class="project-card-body">
+                        <div class="project-card-icon"><i class="fa-solid fa-solar-panel"></i></div>
+                        <h3>Solar Analytics</h3>
+                        <p>Sistema analítico para mapear dados de irradiação solar em regiões do Brasil. Arquitetura relacional otimizada.</p>
+                        <div class="tech-pills"><span class="pill">TypeScript</span><span class="pill">React</span><span class="pill">SQL</span></div>
+                    </div>
+                </a>
+                <a href="https://github.com/DevsScrumAcademy/1-DSM---DevsAcademy" target="_blank" class="project-card reveal delay-3">
+                    <div class="project-card-img"><img src="p1.PNG" alt="DevsScrum Academy"></div>
+                    <div class="project-card-body">
+                        <div class="project-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h3>DevsScrum Academy</h3>
+                        <p>Plataforma educacional front-end para ensinar metodologia ágil Scrum a novos desenvolvedores.</p>
+                        <div class="tech-pills"><span class="pill">HTML/CSS</span><span class="pill">JS ES6</span></div>
+                    </div>
+                </a>
+                <a href="https://github.com/Anderson-Fontes/Controle-de-Qualidade" target="_blank" class="project-card reveal delay-4">
+                    <div class="project-card-img"><img src="qualidade.png" alt="Image QA"></div>
+                    <div class="project-card-body">
+                        <div class="project-card-icon"><i class="fa-solid fa-image"></i></div>
+                        <h3>Image QA</h3>
+                        <p>Ferramenta web leve para análise de pixels e validação algorítmica de imagens via browser.</p>
+                        <div class="tech-pills"><span class="pill">Vanilla JS</span><span class="pill">DOM API</span></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates">
+        <div class="wrap">
+            <div class="section-header reveal">
+                <div class="section-label">Reconhecimentos</div>
+                <h2 class="section-title-lg">Certifi<em>cações</em></h2>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card reveal delay-1">
+                    <div class="cert-img-wrap">
+                        <img src="medalha desgnin.png" alt="Design Patterns Badge">
+                    </div>
+                    <h3>Design Patterns</h3>
+                    <p>Certificação oficial em padrões de projeto e boas práticas de arquitetura de software.</p>
+                    <a href="https://siga.cps.sp.gov.br/cartorio/autenticador.aspx?002d0dab-5bae-4903-96c9-a8762e848abd" target="_blank" class="cert-link">Validar credencial <span>→</span></a>
+                </div>
+                <div class="cert-card reveal delay-2">
+                    <div class="cert-img-wrap">
+                        <img src="medalha frontend basico.png" alt="Frontend Básico Badge">
+                    </div>
+                    <h3>Front-End Básico</h3>
+                    <p>Fundamentos sólidos de desenvolvimento front-end, estrutura e estilização web moderna.</p>
+                    <a href="https://siga.cps.sp.gov.br/cartorio/autenticador.aspx?c64578d8-9a2e-46a1-ad3e-2792c2d1b42e" target="_blank" class="cert-link">Validar credencial <span>→</span></a>
+                </div>
+                <div class="cert-card reveal delay-3">
+                    <div class="cert-img-wrap">
+                        <img src="medalha frontend.png" alt="Dev Front-End Badge">
+                    </div>
+                    <h3>Dev Front-End</h3>
+                    <p>Desenvolvimento avançado de interfaces, interatividade e experiências de usuário completas.</p>
+                    <a href="https://siga.cps.sp.gov.br/cartorio/autenticador.aspx?faaace49-731a-44ed-b37b-2e5f6a69d9b0" target="_blank" class="cert-link">Validar credencial <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contato">
+        <div class="wrap contact-grid">
+            <div class="contact-left reveal-left">
+                <div class="section-label">Vamos trabalhar juntos</div>
+                <h2 class="section-title-lg">Pronto para<br><em>começar?</em></h2>
+                <p>Disponível para desafios técnicos, posições e parcerias. Transformo código complexo em soluções elegantes e eficientes.</p>
+            </div>
+            <div class="contact-right reveal-right delay-2">
+                <div class="contact-card">
+                    <div class="contact-item">
+                        <div class="contact-icon-wrap"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-item-text">
+                            <strong>E-mail</strong>
+                            <a href="mailto:andersonfontes795@gmail.com">andersonfontes795@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon-wrap"><i class="fa-brands fa-github"></i></div>
+                        <div class="contact-item-text">
+                            <strong>GitHub</strong>
+                            <a href="https://github.com/Anderson-Fontes" target="_blank">github.com/Anderson-Fontes</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon-wrap"><i class="fa-solid fa-map-pin"></i></div>
+                        <div class="contact-item-text">
+                            <strong>Localização</strong>
+                            <span style="font-size:.97rem;color:var(--text-200);font-weight:500;">Jacareí, São Paulo — Brasil</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Meu Portfólio | Todos os direitos reservados.</p>
+        <div class="wrap">
+            <p class="footer-copy">© 2026 <em>Anderson Fontes</em> — Engineered with precision.</p>
+            <a href="#sobre" class="footer-top">Voltar ao topo ↑</a>
         </div>
     </footer>
+
+    <script>
+        // Custom Cursor
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        let mx=0, my=0, rx=0, ry=0;
+        document.addEventListener('mousemove', e => {
+            mx=e.clientX; my=e.clientY;
+            dot.style.left=mx+'px'; dot.style.top=my+'px';
+        });
+        (function animRing(){
+            rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+            ring.style.left=rx+'px'; ring.style.top=ry+'px';
+            requestAnimationFrame(animRing);
+        })();
+
+        // Force scroll to top
+        window.scrollTo(0, 0);
+        history.scrollRestoration = 'manual';
+
+        // Fire hero animations immediately (no observer needed)
+        document.querySelectorAll('.hero .reveal, .hero .reveal-left, .hero .reveal-right').forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), 80 + i * 130);
+        });
+
+        // Scroll Reveal for everything outside hero
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, {threshold:0.08});
+        document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => {
+            if (!el.closest('.hero')) io.observe(el);
+        });
+    </script>
 </body>
 </html>
