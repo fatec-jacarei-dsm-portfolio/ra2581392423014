@@ -1,7 +1,7 @@
 # Portfólio de Projetos - Fatec Jacareí
 ### Aluno: Anderson Fontes Fernandes Júnior
 ### Curso: Desenvolvimento de Software Multiplataforma
-### Turma: 2° Semestre de 2024
+### Turma: 4° Semestre de 2026
 ---
  
 ### Portfólio Online  
