@@ -6,4 +6,4 @@
  
 ### Portfólio Online  
 🔗 [Acesse o Portfólio](https://fatec-jacarei-dsm-portfolio.github.io/ra2581392423014/)
-🎤 [Pitch de Apresentação (vídeo)]([https://youtu.be/bELjmhxdfHQ)
+🎤 [Pitch de Apresentação (vídeo)]([https://youtu.be/bELjmhxdfHQ])
