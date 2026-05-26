@@ -233,6 +233,29 @@
         .project-section { display:none; }
         .project-section.active { display:block; }
 
+        /* Project Badges / Classifications */
+        .badge-type {
+            display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+            margin-bottom: 12px; width: fit-content;
+        }
+        .badge-abp {
+            background: rgba(161, 120, 255, 0.15); color: var(--accent-bright);
+            border: 1px solid rgba(161, 120, 255, 0.3);
+        }
+        .badge-disc {
+            background: rgba(61, 214, 200, 0.1); color: var(--teal);
+            border: 1px solid rgba(61, 214, 200, 0.2);
+        }
+
+        /* Contribution Box */
+        .contribution-box {
+            margin-top: 18px; padding: 14px 16px; 
+            background: rgba(255,255,255,0.02); border-left: 2px solid var(--accent);
+            border-radius: 4px; font-size: 0.82rem; color: var(--text-200); line-height: 1.6;
+        }
+        .contribution-box strong { color: var(--accent-bright); font-weight: 600; }
+
         /* ─ ODIN HERO CARD ─ */
         .odin-hero {
             position:relative; border:1px solid rgba(245,200,66,.35); border-radius:16px;
@@ -243,7 +266,6 @@
         }
         .odin-hero:hover { border-color:rgba(245,200,66,.6); box-shadow:0 0 120px rgba(245,200,66,.15), 0 40px 100px rgba(0,0,0,.6); }
 
-        /* Animated background shimmer */
         .odin-hero::before {
             content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
             background:linear-gradient(105deg, transparent 30%, rgba(245,200,66,.04) 50%, transparent 70%);
@@ -292,10 +314,10 @@
         .odin-recognition span { font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
 
         .odin-number { font-family:var(--serif); font-size:7rem; color:rgba(245,200,66,.06); line-height:1; font-style:italic; margin-bottom:-20px; }
-        .odin-info h2 { font-family:var(--serif); font-size:4rem; color:var(--text-100); line-height:1; font-weight:400; margin-bottom:20px; }
+        .odin-info h2 { font-family:var(--serif); font-size:4rem; color:var(--text-100); line-height:1; font-weight:400; margin-bottom:12px; }
         .odin-info h2 em { font-style:italic; color:var(--gold); }
         .odin-info .subtitle { font-size:.82rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; opacity:.7; }
-        .odin-info p { font-size:1rem; color:var(--text-300); line-height:1.8; font-weight:300; margin-bottom:32px; }
+        .odin-info p { font-size:.95rem; color:var(--text-300); line-height:1.7; font-weight:300; margin-bottom:16px; }
 
         .odin-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(245,200,66,.1); border-radius:10px; overflow:hidden; margin-bottom:32px; }
         .odin-stat { background:rgba(245,200,66,.05); padding:16px; text-align:center; }
@@ -309,7 +331,7 @@
         .btn-ghost-gold:hover { background:var(--gold-dim); border-color:rgba(245,200,66,.5); }
 
         /* Academic grid */
-        .academic-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; }
+        .academic-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
         .academic-card {
             background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
             overflow:hidden; transition:all .4s var(--ease-out);
@@ -328,9 +350,9 @@
         }
         .academic-card:hover .academic-card-icon { background:var(--accent); color:#fff; transform:rotate(8deg) scale(1.1); }
         .academic-card h3 { font-family:var(--serif); font-size:1.45rem; color:var(--text-100); margin-bottom:10px; font-weight:400; }
-        .academic-card p { font-size:.86rem; color:var(--text-300); line-height:1.65; margin-bottom:20px; flex:1; }
+        .academic-card p { font-size:.86rem; color:var(--text-300); line-height:1.65; margin-bottom:20px; }
 
-        /* Professional section */
+        /* Professional & Personal sections remain largely the same, optimized for space */
         .pro-featured {
             display:grid; grid-template-columns:1.1fr 1fr; border:1px solid rgba(61,214,200,.25);
             border-radius:16px; overflow:hidden; margin-bottom:24px;
@@ -358,7 +380,7 @@
         .pro-info h3 { font-family:var(--serif); font-size:2.8rem; color:var(--text-100); line-height:1.1; font-weight:400; margin-bottom:16px; }
         .pro-info p { font-size:.95rem; color:var(--text-300); line-height:1.75; margin-bottom:30px; font-weight:300; }
 
-        .tech-pills { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:30px; }
+        .tech-pills { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:16px; }
         .pill { padding:6px 15px; border:1px solid var(--border); border-radius:100px; font-size:.78rem; color:var(--text-300); font-weight:500; transition:all .3s; }
         .pill:hover { background:var(--accent-dim); color:var(--accent-bright); border-color:var(--border-hover); }
         .pill.teal { border-color:rgba(61,214,200,.2); color:var(--teal); background:var(--teal-dim); }
@@ -423,7 +445,7 @@
         .feature-row span { font-size:.88rem; color:var(--text-200); font-weight:500; }
 
         /* Shared link style */
-        .project-link { display:inline-flex; align-items:center; gap:12px; color:var(--accent-bright); font-size:.88rem; font-weight:600; letter-spacing:.04em; transition:gap .3s var(--ease-out); }
+        .project-link { display:inline-flex; align-items:center; gap:12px; color:var(--accent-bright); font-size:.88rem; font-weight:600; letter-spacing:.04em; transition:gap .3s var(--ease-out); margin-top: auto; }
         .project-link:hover { gap:18px; }
 
         /* CERTS */
@@ -548,7 +570,6 @@
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- HEADER -->
     <header>
         <div class="wrap">
             <div class="logo">A.<em>Fontes</em></div>
@@ -561,7 +582,6 @@
         </div>
     </header>
 
-    <!-- HERO -->
     <section class="hero" id="sobre">
         <div class="wrap hero-inner">
             <div class="hero-left">
@@ -629,7 +649,6 @@
         </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills">
         <div class="wrap">
             <div class="section-header reveal">
@@ -649,7 +668,6 @@
         </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projetos">
         <div class="wrap">
             <div class="section-header reveal">
@@ -657,7 +675,6 @@
                 <h2 class="section-title-lg">Projetos <em>em destaque</em></h2>
             </div>
 
-            <!-- TABS -->
             <div class="project-tabs reveal delay-1">
                 <button class="proj-tab active" data-target="academic">
                     <i class="fa-solid fa-graduation-cap" style="margin-right:8px"></i>Acadêmico
@@ -670,10 +687,8 @@
                 </button>
             </div>
 
-            <!-- ═══════════════ ACADÊMICO ═══════════════ -->
             <div class="project-section active" id="academic">
 
-                <!-- ODIN HERO -->
                 <div class="odin-hero reveal">
                     <div class="odin-badge-strip"></div>
                     <div class="odin-inner">
@@ -690,18 +705,17 @@
                                 </div>
                                 <div class="odin-number">O</div>
                                 <h2>ODIN<br><em>Software</em></h2>
-                                <p class="subtitle">Scrum · Equipe CodeGators · Fatec Jacareí</p>
-                                <p>Plataforma de gestão e análise de dados ambientais desenvolvida em parceria com o INPE (Instituto Nacional de Pesquisas Espaciais). O projeto foi reconhecido oficialmente pelo instituto como ferramenta de suporte à pesquisa científica, integrando dados de queimadas, focos de calor e cobertura vegetal em um sistema coeso e escalável.</p>
-                                <div class="odin-stats">
-                                    <div class="odin-stat"><strong>INPE</strong><small>Parceria</small></div>
-                                    <div class="odin-stat"><strong>3★</strong><small>GitHub</small></div>
-                                    <div class="odin-stat"><strong>5+</strong><small>Contribuidores</small></div>
+                                <p class="subtitle">ABP (Projeto Integrador) - 3º Semestre · Equipe CodeGators</p>
+                                <p>Plataforma de gestão e análise de dados ambientais desenvolvida em parceria com o INPE. O projeto foi reconhecido oficialmente pelo instituto como ferramenta de suporte à pesquisa científica, integrando dados de focos de calor.</p>
+                                
+                                <div class="contribution-box" style="margin-bottom: 24px;">
+                                    <strong>Minhas contribuições:</strong> Atuei como UI/UX Designer e Full Stack. Projetei a interface no Figma aplicando Heurísticas de Nielsen e desenvolvi o sistema integrando React.js, Node.js e banco de dados PostgreSQL para renderização dos dados geolocalizados do INPE.
                                 </div>
+
                                 <div class="tech-pills">
                                     <span class="pill">JavaScript</span>
                                     <span class="pill">TypeScript</span>
-                                    <span class="pill">Python</span>
-                                    <span class="pill">CSS</span>
+                                    <span class="pill">React</span>
                                     <span class="pill">Node.js</span>
                                     <span class="pill">PostgreSQL</span>
                                 </div>
@@ -718,65 +732,92 @@
                     </div>
                 </div>
 
-                <!-- Academic grid -->
                 <div class="academic-grid">
+
                     <a href="https://github.com/CodeGators/WildFireExplorer---Front-Server" target="_blank" class="academic-card reveal delay-1">
                         <div class="academic-card-img"><img src="p2.PNG" alt="WildFireExplorer"></div>
                         <div class="academic-card-body">
+                            <span class="badge-type badge-abp">ABP - 3º Semestre</span>
                             <div class="academic-card-icon"><i class="fa-solid fa-fire"></i></div>
                             <h3>WildFire Explorer</h3>
-                            <p>Painel avançado para monitoramento de incêndios florestais em tempo real. Interface limpa com back-end robusto e processamento de dados do INPE.</p>
-                            <div class="tech-pills"><span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">PostgreSQL</span><span class="pill">Node.js</span></div>
-                            <div class="project-link" style="margin-top:auto">Ver no GitHub <span>→</span></div>
+                            <p>Painel avançado para monitoramento de incêndios florestais em tempo real. Interface limpa com processamento de dados geográficos.</p>
+                            <div class="contribution-box" style="margin-bottom: 16px;">
+                                <strong>Contribuição:</strong> Estruturação do Front-End Server em React com TypeScript e arquitetura do banco PostgreSQL.
+                            </div>
+                            <div class="tech-pills"><span class="pill">React</span><span class="pill">PostgreSQL</span><span class="pill">Node.js</span></div>
+                            <div class="project-link">Ver no GitHub <span>→</span></div>
                         </div>
                     </a>
-                    <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Projeto%20Megasena" target="_blank" class="academic-card reveal delay-2">
+
+                    <a href="https://github.com/CodeGators" target="_blank" class="academic-card reveal delay-2">
+                        <div class="academic-card-img"><img src="pillgator-placeholder.jpg" alt="PillGator" style="background: var(--bg-3);"></div>
+                        <div class="academic-card-body">
+                            <span class="badge-type badge-abp">ABP - 4º Semestre (Atual)</span>
+                            <div class="academic-card-icon"><i class="fa-solid fa-pills"></i></div>
+                            <h3>PillGator</h3>
+                            <p>Gaveteiro de medicamentos inteligente automatizado com Arduino, utilizando sensores ultrassônicos, servomotores e buzzers.</p>
+                            <div class="contribution-box" style="margin-bottom: 16px;">
+                                <strong>Contribuição:</strong> Programação da placa Arduino Mega, montagem do circuito de hardware, e integração do ecossistema de sensores e atuadores da gaveta.
+                            </div>
+                            <div class="tech-pills"><span class="pill">C++</span><span class="pill">Arduino</span><span class="pill">Hardware IoT</span></div>
+                            <div class="project-link">Em Desenvolvimento <span>→</span></div>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/DevsScrumAcademy/1-DSM---DevsAcademy" target="_blank" class="academic-card reveal delay-3">
+                        <div class="academic-card-img"><img src="p1.PNG" alt="DevsScrum Academy"></div>
+                        <div class="academic-card-body">
+                            <span class="badge-type badge-abp">ABP - 1º Semestre</span>
+                            <div class="academic-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                            <h3>DevsScrum Academy</h3>
+                            <p>Plataforma educacional para ensinar metodologia ágil Scrum a novos desenvolvedores.</p>
+                            <div class="contribution-box" style="margin-bottom: 16px;">
+                                <strong>Contribuição:</strong> Responsável pela prototipação da UI e desenvolvimento semântico Front-End (HTML/CSS e Vanilla JS) focado em acessibilidade.
+                            </div>
+                            <div class="tech-pills"><span class="pill">HTML/CSS</span><span class="pill">JS ES6</span></div>
+                            <div class="project-link">Ver no GitHub <span>→</span></div>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Projeto%20Megasena" target="_blank" class="academic-card reveal delay-1">
                         <div class="academic-card-img"><img src="megasena.png" alt="Megasena Checker"></div>
                         <div class="academic-card-body">
+                            <span class="badge-type badge-disc">Disciplina - Web II</span>
                             <div class="academic-card-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
                             <h3>Megasena Checker</h3>
                             <p>Aplicação Full Stack para busca, auditoria e armazenamento de sorteios da loteria. Foco em resposta rápida e UX intuitiva.</p>
                             <div class="tech-pills"><span class="pill">React</span><span class="pill">Node.js</span><span class="pill">SQL</span></div>
-                            <div class="project-link" style="margin-top:auto">Ver no GitHub <span>→</span></div>
+                            <div class="project-link">Ver no GitHub <span>→</span></div>
                         </div>
                     </a>
-                    <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Sistema%20de%20Irradia%C3%A7%C3%A3o%20Solar" target="_blank" class="academic-card reveal delay-3">
+
+                    <a href="https://github.com/Anderson-Fontes/Desenvolvimento-Web-II/tree/main/Sistema%20de%20Irradia%C3%A7%C3%A3o%20Solar" target="_blank" class="academic-card reveal delay-2">
                         <div class="academic-card-img"><img src="irradiacao.png" alt="Solar Analytics"></div>
                         <div class="academic-card-body">
+                            <span class="badge-type badge-disc">Disciplina - Web II</span>
                             <div class="academic-card-icon"><i class="fa-solid fa-solar-panel"></i></div>
                             <h3>Solar Analytics</h3>
-                            <p>Sistema analítico para mapear dados de irradiação solar em regiões do Brasil. Arquitetura relacional otimizada para consultas geográficas.</p>
+                            <p>Sistema analítico para mapear dados de irradiação solar em regiões do Brasil. Arquitetura relacional otimizada.</p>
                             <div class="tech-pills"><span class="pill">TypeScript</span><span class="pill">React</span><span class="pill">SQL</span></div>
-                            <div class="project-link" style="margin-top:auto">Ver no GitHub <span>→</span></div>
+                            <div class="project-link">Ver no GitHub <span>→</span></div>
                         </div>
                     </a>
-                    <a href="https://github.com/DevsScrumAcademy/1-DSM---DevsAcademy" target="_blank" class="academic-card reveal delay-1">
-                        <div class="academic-card-img"><img src="p1.PNG" alt="DevsScrum Academy"></div>
-                        <div class="academic-card-body">
-                            <div class="academic-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                            <h3>DevsScrum Academy</h3>
-                            <p>Plataforma educacional front-end para ensinar metodologia ágil Scrum a novos desenvolvedores da área de TI.</p>
-                            <div class="tech-pills"><span class="pill">HTML/CSS</span><span class="pill">JS ES6</span></div>
-                            <div class="project-link" style="margin-top:auto">Ver no GitHub <span>→</span></div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/Anderson-Fontes/Controle-de-Qualidade" target="_blank" class="academic-card reveal delay-2">
+
+                    <a href="https://github.com/Anderson-Fontes/Controle-de-Qualidade" target="_blank" class="academic-card reveal delay-3">
                         <div class="academic-card-img"><img src="qualidade.png" alt="Image QA"></div>
                         <div class="academic-card-body">
+                            <span class="badge-type badge-disc">Disciplina - Web I</span>
                             <div class="academic-card-icon"><i class="fa-solid fa-image"></i></div>
                             <h3>Image QA</h3>
-                            <p>Ferramenta web leve para análise de pixels e validação algorítmica de imagens diretamente no browser, sem dependências externas.</p>
+                            <p>Ferramenta web leve para análise de pixels e validação algorítmica de imagens diretamente no browser.</p>
                             <div class="tech-pills"><span class="pill">Vanilla JS</span><span class="pill">DOM API</span></div>
-                            <div class="project-link" style="margin-top:auto">Ver no GitHub <span>→</span></div>
+                            <div class="project-link">Ver no GitHub <span>→</span></div>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- ═══════════════ PROFISSIONAL ═══════════════ -->
             <div class="project-section" id="professional">
-
-                <!-- Almoxarifado Centriar — Featured -->
                 <a href="https://github.com/Anderson-Fontes" target="_blank" class="pro-featured reveal">
                     <div class="pro-featured-img">
                         <img src="estoque.jpeg" alt="Sistema de Almoxarifado Centriar">
@@ -802,13 +843,12 @@
                     </div>
                 </a>
 
-                <!-- Calculadora de Materiais -->
                 <div class="pro-grid">
                     <a href="https://github.com/Anderson-Fontes" target="_blank" class="pro-card reveal delay-1">
                         <div class="pro-card-icon"><i class="fa-solid fa-calculator"></i></div>
                         <div class="pro-card-content">
                             <h3>Calculadora de Materiais</h3>
-                            <p>Ferramenta web profissional para cálculo e estimativa de materiais de construção/produção. Permite ao usuário inserir dimensões, selecionar materiais e receber automaticamente quantidades, perdas percentuais e custo estimado. Desenvolvida com foco em precisão e usabilidade para uso diário em campo.</p>
+                            <p>Ferramenta web profissional para cálculo e estimativa de materiais de construção/produção. Permite ao usuário inserir dimensões, selecionar materiais e receber automaticamente quantidades, perdas percentuais e custo estimado.</p>
                             <div class="tech-pills" style="margin-bottom:16px">
                                 <span class="pill teal">JavaScript</span>
                                 <span class="pill teal">HTML/CSS</span>
@@ -819,7 +859,6 @@
                 </div>
             </div>
 
-            <!-- ═══════════════ PESSOAL ═══════════════ -->
             <div class="project-section" id="personal">
                 <a href="https://github.com/Anderson-Fontes" target="_blank" class="personal-featured reveal">
                     <div class="personal-info">
@@ -829,7 +868,7 @@
                         </div>
                         <div class="personal-number">01</div>
                         <h3>Tradutor<br>de PDFs</h3>
-                        <p>Aplicação web que automatiza a tradução de documentos PDF, preservando a formatação original — layouts, tabelas, colunas e hierarquia tipográfica intactas. Utiliza processamento inteligente de texto para identificar blocos de conteúdo e reposicioná-los corretamente após a tradução, evitando a desconfiguração comum em ferramentas genéricas.</p>
+                        <p>Aplicação web que automatiza a tradução de documentos PDF, preservando a formatação original — layouts, tabelas, colunas e hierarquia tipográfica intactas. Utiliza processamento inteligente de texto para evitar a desconfiguração comum em ferramentas genéricas.</p>
                         <div class="tech-pills" style="margin-bottom:32px">
                             <span class="pill">Python</span>
                             <span class="pill">React</span>
@@ -840,35 +879,17 @@
                     </div>
                     <div class="personal-visual">
                         <div class="personal-features">
-                            <div class="feature-row">
-                                <i class="fa-solid fa-file-pdf"></i>
-                                <span>Upload e processamento de PDFs de qualquer tamanho</span>
-                            </div>
-                            <div class="feature-row">
-                                <i class="fa-solid fa-table-columns"></i>
-                                <span>Preservação de layout, tabelas e colunas originais</span>
-                            </div>
-                            <div class="feature-row">
-                                <i class="fa-solid fa-language"></i>
-                                <span>Suporte a múltiplos idiomas de origem e destino</span>
-                            </div>
-                            <div class="feature-row">
-                                <i class="fa-solid fa-download"></i>
-                                <span>Download do PDF traduzido com formatação mantida</span>
-                            </div>
-                            <div class="feature-row">
-                                <i class="fa-solid fa-robot"></i>
-                                <span>Tradução inteligente via IA com contexto semântico</span>
-                            </div>
+                            <div class="feature-row"><i class="fa-solid fa-file-pdf"></i><span>Upload e processamento de PDFs de qualquer tamanho</span></div>
+                            <div class="feature-row"><i class="fa-solid fa-table-columns"></i><span>Preservação de layout, tabelas e colunas originais</span></div>
+                            <div class="feature-row"><i class="fa-solid fa-language"></i><span>Suporte a múltiplos idiomas de origem e destino</span></div>
+                            <div class="feature-row"><i class="fa-solid fa-download"></i><span>Download do PDF traduzido com formatação mantida</span></div>
                         </div>
                     </div>
                 </a>
             </div>
 
-        </div><!-- /wrap -->
-    </section>
+        </div></section>
 
-    <!-- CERTIFICATES -->
     <section id="certificates">
         <div class="wrap">
             <div class="section-header reveal">
@@ -898,7 +919,6 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contato">
         <div class="wrap contact-grid">
             <div class="contact-left reveal-left">
@@ -909,10 +929,10 @@
             <div class="contact-right reveal-right delay-2">
                 <div class="contact-card">
                     <div class="contact-item">
-                        <div class="contact-icon-wrap"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="contact-icon-wrap"><i class="fa-brands fa-linkedin-in"></i></div>
                         <div class="contact-item-text">
-                            <strong>E-mail</strong>
-                            <a href="mailto:andersonfontes795@gmail.com">andersonfontes795@gmail.com</a>
+                            <strong>LinkedIn</strong>
+                            <a href="https://linkedin.com/in/seu-linkedin" target="_blank">linkedin.com/in/anderson-fontes</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -934,7 +954,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="wrap">
             <p class="footer-copy">© 2026 <em>Anderson Fontes</em> — Engineered with precision.</p>
@@ -971,7 +990,6 @@
                 tab.classList.add('active');
                 const target = document.getElementById(tab.dataset.target);
                 target.classList.add('active');
-                // Trigger reveals inside newly shown section
                 target.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => {
                     el.classList.remove('visible');
                     setTimeout(() => el.classList.add('visible'), 50);
