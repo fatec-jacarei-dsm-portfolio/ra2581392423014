@@ -139,7 +139,11 @@
   btn.className = 'lang-toggle';
   btn.type = 'button';
   btn.innerHTML = '<span data-l="pt">PT</span><span data-l="en">EN</span>';
-  document.querySelector('header .wrap').appendChild(btn);
+  const host = document.querySelector('header .wrap') || document.querySelector('header') || document.body;
+  if (host === document.body) {
+    btn.style.cssText += ';position:fixed;top:16px;right:16px;z-index:200';
+  }
+  host.appendChild(btn);
 
   // Coleta nós de texto e atributos alt traduzíveis
   const items = [];
